@@ -3,128 +3,1139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Glass Construct</title>
+    <title>Career Counselling vs Career Design: A Comprehensive Comparison</title>
     <style>
-        /* 1. FIXED: Body must be transparent so video shows through */
-        body, html { 
-            margin: 0; padding: 0; 
-            background-color: transparent; /* This was the problem */
-            font-family: 'Courier New', monospace; 
-            cursor: crosshair; 
-        }
+        :root {
+  /* Primitive Color Tokens */
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
 
-        /* 2. VIDEO: Fixed to back */
-        #video-container {
-            position: fixed; top: 0; left: 0; 
-            width: 100%; height: 100%;
-            z-index: -1; /* Sits behind everything */
-            background: black; /* Fallback color */
-        }
-        video {
-            width: 100%; height: 100%; 
-            object-fit: cover;
-            opacity: 1; /* Fully visible */
-        }
+  /* RGB versions for opacity control */
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
 
-        /* 3. SPACER: Forces scrollbar */
-        #spacer { 
-            height: 600vh; 
-        } 
+  /* Background color tokens (Light Mode) */
+  --color-bg-1: rgba(59, 130, 246, 0.08);
+  --color-bg-2: rgba(245, 158, 11, 0.08);
+  --color-bg-3: rgba(34, 197, 94, 0.08);
+  --color-bg-4: rgba(239, 68, 68, 0.08);
+  --color-bg-5: rgba(147, 51, 234, 0.08);
+  --color-bg-6: rgba(249, 115, 22, 0.08);
+  --color-bg-7: rgba(236, 72, 153, 0.08);
+  --color-bg-8: rgba(6, 182, 212, 0.08);
 
-        /* 4. UI TEXT */
-        .overlay {
-            position: fixed; width: 100%; text-align: center; 
-            color: white; mix-blend-mode: difference; 
-            pointer-events: none; top: 50%;
-            font-size: 3rem; letter-spacing: 8px; 
-            transform: translateY(-50%);
-            text-transform: uppercase;
-            transition: opacity 0.5s ease;
-        }
-        
-        .hint {
-            position: fixed; bottom: 30px; width: 100%; text-align: center;
-            color: rgba(255, 255, 255, 0.7); font-size: 0.8rem; 
-            mix-blend-mode: exclusion;
-        }
+  /* Semantic Color Tokens (Light Mode) */
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
 
-        /* 5. MOUSE TRAIL */
-        .trail {
-            position: fixed;
-            width: 20px; height: 20px;
-            border: 1px solid white;
-            pointer-events: none;
-            mix-blend-mode: overlay;
-            transform: translate(-50%, -50%);
-        }
+  /* Typography */
+  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --letter-spacing-tight: -0.01em;
+
+  /* Spacing */
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),
+    0 4px 6px -2px rgba(0, 0, 0, 0.02);
+
+  /* Animation */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+
+    --color-bg-1: rgba(29, 78, 216, 0.15);
+    --color-bg-2: rgba(180, 83, 9, 0.15);
+    --color-bg-3: rgba(21, 128, 61, 0.15);
+    --color-bg-4: rgba(185, 28, 28, 0.15);
+    --color-bg-5: rgba(107, 33, 168, 0.15);
+    --color-bg-6: rgba(194, 65, 12, 0.15);
+    --color-bg-7: rgba(190, 24, 93, 0.15);
+    --color-bg-8: rgba(8, 145, 178, 0.15);
+
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-info: var(--color-gray-300);
+    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+  }
+}
+
+@font-face {
+  font-family: 'FKGroteskNeue';
+  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2')
+    format('woff2');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-normal);
+    color: var(--color-text);
+    background-color: var(--color-background);
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-24);
+}
+
+/* Header Section */
+.header {
+    background-color: var(--color-surface);
+    border-bottom: 2px solid var(--color-primary);
+    padding: var(--space-32) 0;
+    margin-bottom: var(--space-32);
+    box-shadow: var(--shadow-sm);
+}
+
+.header h1 {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin-bottom: var(--space-12);
+    letter-spacing: var(--letter-spacing-tight);
+}
+
+.header .subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-8);
+}
+
+.header .date {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-medium);
+}
+
+/* Table of Contents */
+.toc {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-24);
+    margin-bottom: var(--space-32);
+    box-shadow: var(--shadow-sm);
+}
+
+.toc h2 {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-16);
+    color: var(--color-text);
+}
+
+.toc ul {
+    list-style: none;
+}
+
+.toc li {
+    margin-bottom: var(--space-8);
+}
+
+.toc a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: var(--font-size-base);
+    transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.toc a:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+}
+
+/* Section Styling */
+.section {
+    margin-bottom: var(--space-32);
+    padding: var(--space-32);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-card-border);
+    box-shadow: var(--shadow-sm);
+}
+
+.section h2 {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-24);
+    color: var(--color-text);
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: var(--space-12);
+}
+
+.section h3 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin: var(--space-24) 0 var(--space-16) 0;
+    color: var(--color-text);
+}
+
+.section p {
+    font-size: var(--font-size-base);
+    line-height: 1.7;
+    color: var(--color-text);
+    margin-bottom: var(--space-16);
+}
+
+/* Executive Summary */
+.executive-summary {
+    background-color: var(--color-bg-1);
+    padding: var(--space-24);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--color-primary);
+    margin-bottom: var(--space-24);
+}
+
+.key-takeaway {
+    background-color: var(--color-bg-3);
+    padding: var(--space-16);
+    border-radius: var(--radius-base);
+    margin: var(--space-16) 0;
+    border-left: 4px solid var(--color-success);
+}
+
+.key-takeaway strong {
+    color: var(--color-text);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* Comparison Table */
+.comparison-table-wrapper {
+    overflow-x: auto;
+    margin: var(--space-24) 0;
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-base);
+}
+
+.comparison-table thead {
+    background-color: var(--color-primary);
+    color: var(--color-btn-primary-text);
+}
+
+.comparison-table th {
+    padding: var(--space-16);
+    text-align: left;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-lg);
+    border: 1px solid var(--color-border);
+}
+
+.comparison-table td {
+    padding: var(--space-16);
+    border: 1px solid var(--color-border);
+    vertical-align: top;
+}
+
+.comparison-table tbody tr:nth-child(odd) {
+    background-color: var(--color-surface);
+}
+
+.comparison-table tbody tr:nth-child(even) {
+    background-color: var(--color-secondary);
+}
+
+.comparison-table tbody tr:hover {
+    background-color: var(--color-secondary-hover);
+    transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.comparison-table .category-cell {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+}
+
+/* Visual Cards */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-24);
+    margin: var(--space-24) 0;
+}
+
+.card {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-24);
+    border: 1px solid var(--color-card-border);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--duration-normal) var(--ease-standard),
+                box-shadow var(--duration-normal) var(--ease-standard);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card-counselling {
+    border-top: 4px solid var(--color-primary);
+    background-color: var(--color-bg-1);
+}
+
+.card-design {
+    border-top: 4px solid var(--color-success);
+    background-color: var(--color-bg-3);
+}
+
+.card-icon {
+    font-size: 48px;
+    margin-bottom: var(--space-16);
+    text-align: center;
+}
+
+.card h3 {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-16);
+    text-align: center;
+}
+
+.card p {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    margin-bottom: var(--space-16);
+    text-align: center;
+}
+
+.card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.card li {
+    padding: var(--space-8) 0;
+    padding-left: var(--space-24);
+    position: relative;
+    font-size: var(--font-size-base);
+}
+
+.card li:before {
+    content: "●";
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+}
+
+.card-design li:before {
+    color: var(--color-success);
+}
+
+/* Theoretical Foundations */
+.theory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-16);
+    margin: var(--space-24) 0;
+}
+
+.theory-item {
+    background-color: var(--color-secondary);
+    padding: var(--space-16);
+    border-radius: var(--radius-base);
+    border-left: 3px solid var(--color-primary);
+}
+
+.theory-item h4 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-8);
+    color: var(--color-text);
+}
+
+.theory-item p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    margin: 0;
+}
+
+/* Key Differences Cards */
+.differences-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-16);
+    margin: var(--space-24) 0;
+}
+
+.difference-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-20);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.difference-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.difference-card h4 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-12);
+    color: var(--color-primary);
+}
+
+.difference-card .vs {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-medium);
+    margin: var(--space-8) 0;
+}
+
+.difference-card .value {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    font-weight: var(--font-weight-medium);
+}
+
+/* Decision Guide */
+.decision-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-24);
+    margin: var(--space-24) 0;
+}
+
+.decision-box {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-24);
+    border: 2px solid var(--color-card-border);
+    box-shadow: var(--shadow-sm);
+}
+
+.decision-box h4 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-16);
+    color: var(--color-text);
+    text-align: center;
+}
+
+.decision-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.decision-box li {
+    padding: var(--space-8) 0;
+    padding-left: var(--space-24);
+    position: relative;
+    font-size: var(--font-size-base);
+}
+
+.decision-box li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-success);
+    font-weight: var(--font-weight-bold);
+}
+
+.decision-box-counselling {
+    border-top: 4px solid var(--color-primary);
+}
+
+.decision-box-design {
+    border-top: 4px solid var(--color-success);
+}
+
+/* Integration Section */
+.integration-list {
+    background-color: var(--color-bg-2);
+    padding: var(--space-20);
+    border-radius: var(--radius-base);
+    margin: var(--space-16) 0;
+}
+
+.integration-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.integration-list li {
+    padding: var(--space-8) 0;
+    padding-left: var(--space-24);
+    position: relative;
+    font-size: var(--font-size-base);
+}
+
+.integration-list li:before {
+    content: "◆";
+    position: absolute;
+    left: 0;
+    color: var(--color-warning);
+    font-weight: var(--font-weight-bold);
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: var(--space-32);
+    right: var(--space-32);
+    background-color: var(--color-primary);
+    color: var(--color-btn-primary-text);
+    border: none;
+    border-radius: var(--radius-full);
+    width: 48px;
+    height: 48px;
+    font-size: var(--font-size-xl);
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duration-normal) var(--ease-standard),
+                visibility var(--duration-normal) var(--ease-standard),
+                background-color var(--duration-fast) var(--ease-standard);
+    z-index: 1000;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: var(--color-primary-hover);
+}
+
+/* Expandable Sections */
+.expandable {
+    margin: var(--space-16) 0;
+}
+
+.expandable-header {
+    background-color: var(--color-secondary);
+    padding: var(--space-16);
+    border-radius: var(--radius-base);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.expandable-header:hover {
+    background-color: var(--color-secondary-hover);
+}
+
+.expandable-header h4 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin: 0;
+}
+
+.expandable-icon {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    transition: transform var(--duration-normal) var(--ease-standard);
+}
+
+.expandable-icon.expanded {
+    transform: rotate(180deg);
+}
+
+.expandable-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--duration-normal) var(--ease-standard);
+}
+
+.expandable-content.expanded {
+    max-height: 2000px;
+    padding: var(--space-16);
+}
+
+/* Print Styles */
+@media print {
+    .back-to-top,
+    .toc {
+        display: none;
+    }
+    
+    .section {
+        page-break-inside: avoid;
+        box-shadow: none;
+    }
+    
+    .expandable-content {
+        max-height: none !important;
+        display: block !important;
+    }
+    
+    body {
+        background-color: white;
+        color: black;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .section {
+        padding: var(--space-16);
+    }
+    
+    .comparison-table {
+        font-size: var(--font-size-sm);
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+        padding: var(--space-8);
+    }
+    
+    .cards-container,
+    .theory-grid,
+    .differences-grid,
+    .decision-grid {
+        grid-template-columns: 1fr;
+    }
+}
     </style>
 </head>
 <body>
-
-    <div id="video-container">
-        <video id="v0" src="video.mp4" playsinline muted preload="auto"></video>
+    <!-- Header Section -->
+    <div class="header">
+        <div class="container">
+            <h1>Career Counselling vs Career Design: A Comprehensive Comparison</h1>
+            <p class="subtitle">A detailed analysis of two distinct approaches to career development</p>
+            <p class="date">Report Date: November 9, 2025</p>
+        </div>
     </div>
 
-    <div class="overlay" id="text">ISOLATION</div>
-    <div class="hint">SCROLL TO MULTIPLY</div>
+    <div class="container">
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#executive-summary">Executive Summary</a></li>
+                <li><a href="#visual-distinction">Visual Distinction</a></li>
+                <li><a href="#detailed-comparison">Detailed Comparison Table</a></li>
+                <li><a href="#theoretical-foundations">Theoretical Foundations</a></li>
+                <li><a href="#key-differences">Key Differences Summary</a></li>
+                <li><a href="#decision-guide">When to Choose Which Approach</a></li>
+                <li><a href="#integration">Integration &amp; Blended Approaches</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+            </ul>
+        </div>
 
-    <div id="spacer"></div>
+        <!-- Executive Summary -->
+        <section id="executive-summary" class="section">
+            <h2>Executive Summary</h2>
+            <div class="executive-summary">
+                <p>
+                    Career counselling and career design represent fundamentally different paradigms in the field of career development. These approaches emerged from distinct theoretical foundations and respond to different workplace realities. Understanding their differences is crucial for individuals seeking career guidance and for practitioners determining which methodology best serves their clients' needs.
+                </p>
+                
+                <div class="key-takeaway">
+                    <strong>Key Takeaway:</strong> Career counselling is a traditional, structured, assessment-based approach rooted in matching individual traits to occupational requirements. Career design is an adaptive, experimental, narrative-based approach that treats careers as actively constructed through meaning-making and iterative experimentation.
+                </div>
+                
+                <p>
+                    Career counselling, developed in the early 20th century, operates from a positivist framework where careers are viewed as relatively stable journeys that can be optimized through scientific assessment and expert guidance. This approach excels in providing clear direction for those entering the workforce or seeking structured career planning.
+                </p>
+                
+                <p>
+                    Career design, emerging from post-modern and constructivist theory, recognizes the fluid, unpredictable nature of contemporary work. It emphasizes personal agency, narrative identity, and adaptability. Rather than finding the "right" career through assessment, career design focuses on developing the capacity to construct meaningful work across the lifespan through experimentation and storytelling.
+                </p>
+            </div>
+        </section>
+
+        <!-- Visual Distinction Cards -->
+        <section id="visual-distinction" class="section">
+            <h2>Visual Distinction</h2>
+            <div class="cards-container">
+                <div class="card card-counselling">
+                    <div class="card-icon">📊</div>
+                    <h3>Career Counselling</h3>
+                    <p>Traditional, assessment-based approach to career development</p>
+                    <ul>
+                        <li>Assessment-based and data-driven</li>
+                        <li>Expert-led guidance and recommendations</li>
+                        <li>Structured, predictable process</li>
+                        <li>Focus on matching traits to occupations</li>
+                        <li>Emphasis on career stability</li>
+                        <li>Problem-identification approach</li>
+                    </ul>
+                </div>
+                
+                <div class="card card-design">
+                    <div class="card-icon">🎨</div>
+                    <h3>Career Design</h3>
+                    <p>Modern, narrative-based approach to career construction</p>
+                    <ul>
+                        <li>Narrative-based and story-driven</li>
+                        <li>Client-led exploration and discovery</li>
+                        <li>Flexible, adaptive process</li>
+                        <li>Focus on constructing meaning and purpose</li>
+                        <li>Embraces career flexibility and change</li>
+                        <li>Solution-oriented and strengths-based</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Comparison Table -->
+        <section id="detailed-comparison" class="section">
+            <h2>Detailed Comparison Table</h2>
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">Aspect</th>
+                            <th style="width: 40%;">Career Counselling</th>
+                            <th style="width: 40%;">Career Design</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="category-cell">Philosophical Foundation</td>
+                            <td>Rooted in trait-and-factor theory, matching individuals to careers based on stable traits, interests, and abilities. Based on person-environment fit models (Holland, Super). Views career as relatively fixed and predetermined.</td>
+                            <td>Based on constructivist and narrative approaches. Views career as actively constructed through meaning-making and storytelling. Emphasizes self-construction rather than self-actualization. Post-modern perspective recognizing subjective reality.</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">Core Approach</td>
+                            <td>Structured, directive approach focusing on assessment and expert guidance. Counselor acts as expert providing advice based on test results and labor market information. Emphasizes matching existing skills/interests to available occupations.</td>
+                            <td>Iterative, experimental, and adaptive approach. Client-centered with counselor as facilitator. Uses design thinking principles: empathize, define, ideate, prototype, and test. Treats career as series of experiments/prototypes.</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">Primary Tools &amp; Methods</td>
+                            <td>Psychometric assessments (personality tests, interest inventories, aptitude tests). Standardized tools like Myers-Briggs Type Indicator (MBTI), Strong Interest Inventory, Holland Code (RIASEC). Structured interviews and career assessments.</td>
+                            <td>Narrative techniques and storytelling. Career Construction Interview (5 key questions about role models, magazines, stories, motto, early memories). Prototyping conversations and experiences. Mind maps, SWOT analysis. Small-scale experiments.</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">Time Orientation</td>
+                            <td>Focuses on current state and near-future planning. Emphasizes systematic, long-term competence development. Goal-setting for specific career outcomes.</td>
+                            <td>Holistic life-span perspective. Looks at past patterns to inform future. Emphasizes continuous adaptation and learning throughout life. Views career as ongoing construction process across multiple life roles.</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">View of Career Path</td>
+                            <td>Linear trajectory with clear stages and progression. Career as occupational journey. Focus on career stability and advancement within chosen field.</td>
+                            <td>Non-linear, flexible, and emergent. Career development as chaotic and unpredictable. Multiple possible paths and iterations. Career as one aspect of broader life design integrating work and non-work roles.</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">Problem-Solving Method</td>
+                            <td>Problem-focused: identifying skills gaps and barriers. Structured decision-making process. Emphasis on finding 'right' career fit based on assessments.</td>
+                            <td>Solution-focused: building on existing strengths and possibilities. Reframes 'problems' as opportunities for learning. Low-risk experimentation to discover what works. Embraces ambiguity and uncertainty.</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">Client Outcomes</td>
+                            <td>Career clarity through self-assessment and exploration. Job search skills (resume writing, interviewing). Identification of suitable career options. Career decision-making.</td>
+                            <td>Development of career adaptability: concern, control, curiosity, confidence (the 4 Cs). Enhanced narratability - ability to tell coherent career story. Increased activism and agency in career construction. Life satisfaction across multiple roles.</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">Role of Context</td>
+                            <td>Limited consideration of contextual factors. Primary focus on individual traits and labor market information. May overlook broader life circumstances.</td>
+                            <td>Strong emphasis on context: family, community, society, economic trends, cultural background. Recognizes complex interplay of factors influencing career. Acknowledges intersectionality and systemic influences.</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">Scope</td>
+                            <td>Narrowly focused on work/career domain. Separation of career from personal life. Emphasis on occupational choice and job acquisition.</td>
+                            <td>Holistic integration of work and life. Considers multiple life roles (parent, student, community member). Career as vehicle for broader life purpose and meaning. Focus on life satisfaction, not just career satisfaction.</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">Methodology</td>
+                            <td>Three-phase process: self-assessment, exploration of options, decision-making and planning. Typically 3-6 structured sessions. Focus on data gathering and interpretation.</td>
+                            <td>Iterative process: deconstruction (revealing narratives), co-construction (exploring stories), reconstruction (creating new narratives). Continuous cycles of ideation, prototyping, testing, and refinement. Ongoing process without fixed endpoint.</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">Adaptability to Modern Work</td>
+                            <td>Developed for stable, industrial-era job markets. Struggles with gig economy, portfolio careers, and rapid change. May feel outdated for contemporary workforce needs.</td>
+                            <td>Designed for post-modern, uncertain work environments. Embraces flexibility, employability, and lifelong learning. Better suited to navigating frequent transitions and non-traditional career paths.</td>
+                        </tr>
+                        <tr>
+                            <td class="category-cell">Best Suited For</td>
+                            <td>Individuals seeking clear career direction. Those comfortable with structured guidance. Entry-level career seekers needing practical job search support. People preferring expert advice and assessment-based recommendations.</td>
+                            <td>Mid-career professionals exploring transitions. Those dealing with complex life situations. Individuals seeking deeper meaning and purpose. People comfortable with ambiguity and experimentation. Anyone wanting to integrate work with broader life goals.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Theoretical Foundations -->
+        <section id="theoretical-foundations" class="section">
+            <h2>Theoretical Foundations</h2>
+            
+            <h3>Career Counselling Theories</h3>
+            <div class="theory-grid">
+                <div class="theory-item">
+                    <h4>Parsons' Trait-and-Factor Theory (1909)</h4>
+                    <p>The foundation of career counselling - matching individual traits with occupational requirements</p>
+                </div>
+                <div class="theory-item">
+                    <h4>Holland's RIASEC Model</h4>
+                    <p>Six personality types (Realistic, Investigative, Artistic, Social, Enterprising, Conventional) matched to work environments</p>
+                </div>
+                <div class="theory-item">
+                    <h4>Super's Life-Span, Life-Space Theory</h4>
+                    <p>Career development across life stages (growth, exploration, establishment, maintenance, decline)</p>
+                </div>
+            </div>
+            
+            <h3>Career Design Theories</h3>
+            <div class="theory-grid">
+                <div class="theory-item">
+                    <h4>Savickas's Career Construction Theory</h4>
+                    <p>Career development as an active process of self-construction through narrative and meaning-making</p>
+                </div>
+                <div class="theory-item">
+                    <h4>Life Design Paradigm</h4>
+                    <p>Holistic approach integrating work and non-work roles across the lifespan</p>
+                </div>
+                <div class="theory-item">
+                    <h4>Design Thinking Principles</h4>
+                    <p>Iterative process of empathizing, defining, ideating, prototyping, and testing applied to careers</p>
+                </div>
+            </div>
+            
+            <p style="margin-top: var(--space-24);">
+                The theoretical foundations reveal the paradigm shift from career counselling to career design. Career counselling emerged from vocational psychology's attempt to apply scientific methods to career choice, seeking universal principles and objective measures. Career design responds to post-modern recognition that meaning is constructed, not discovered, and that careers unfold through narrative processes rather than linear stages.
+            </p>
+        </section>
+
+        <!-- Key Differences Summary -->
+        <section id="key-differences" class="section">
+            <h2>Key Differences Summary</h2>
+            <div class="differences-grid">
+                <div class="difference-card">
+                    <h4>Structure vs Flexibility</h4>
+                    <div class="value">Counselling: Structured process</div>
+                    <div class="vs">VS</div>
+                    <div class="value">Design: Flexible iteration</div>
+                </div>
+                
+                <div class="difference-card">
+                    <h4>Assessment vs Narrative</h4>
+                    <div class="value">Counselling: Psychometric tests</div>
+                    <div class="vs">VS</div>
+                    <div class="value">Design: Story exploration</div>
+                </div>
+                
+                <div class="difference-card">
+                    <h4>Expert-led vs Client-led</h4>
+                    <div class="value">Counselling: Counselor as expert</div>
+                    <div class="vs">VS</div>
+                    <div class="value">Design: Client as protagonist</div>
+                </div>
+                
+                <div class="difference-card">
+                    <h4>Static vs Dynamic</h4>
+                    <div class="value">Counselling: Fixed career path</div>
+                    <div class="vs">VS</div>
+                    <div class="value">Design: Emergent journey</div>
+                </div>
+                
+                <div class="difference-card">
+                    <h4>Problem vs Solution Focus</h4>
+                    <div class="value">Counselling: Identify gaps</div>
+                    <div class="vs">VS</div>
+                    <div class="value">Design: Build on strengths</div>
+                </div>
+                
+                <div class="difference-card">
+                    <h4>Career vs Life Integration</h4>
+                    <div class="value">Counselling: Work-focused</div>
+                    <div class="vs">VS</div>
+                    <div class="value">Design: Holistic life design</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Decision Guide -->
+        <section id="decision-guide" class="section">
+            <h2>When to Choose Which Approach</h2>
+            <p>The choice between career counselling and career design depends on your current situation, needs, and comfort with different approaches. Here's a guide to help you decide:</p>
+            
+            <div class="decision-grid">
+                <div class="decision-box decision-box-counselling">
+                    <h4>Choose Career Counselling If You:</h4>
+                    <ul>
+                        <li>Beginning career journey and need clear direction</li>
+                        <li>Uncertain about which field matches your skills</li>
+                        <li>Seeking structured guidance and expert advice</li>
+                        <li>Need practical job search assistance</li>
+                        <li>Prefer data-driven decision making</li>
+                        <li>Looking for career assessment results</li>
+                    </ul>
+                </div>
+                
+                <div class="decision-box decision-box-design">
+                    <h4>Choose Career Design If You:</h4>
+                    <ul>
+                        <li>Navigating mid-career transition or change</li>
+                        <li>Seeking deeper purpose and meaning in work</li>
+                        <li>Dealing with non-linear career path</li>
+                        <li>Want to integrate work with life goals</li>
+                        <li>Comfortable with experimentation and uncertainty</li>
+                        <li>Desire to create custom career path</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpandable('scenarios')">
+                    <h4>Specific Scenarios &amp; Examples</h4>
+                    <span class="expandable-icon" id="scenarios-icon">▼</span>
+                </div>
+                <div class="expandable-content" id="scenarios-content">
+                    <h4 style="color: var(--color-primary); margin-top: var(--space-16);">Career Counselling Scenarios:</h4>
+                    <p><strong>Scenario 1 - Recent Graduate:</strong> Sarah just completed her degree in psychology and needs help determining which career paths align with her skills. Career counselling provides structured assessments to identify suitable occupations and practical job search support.</p>
+                    
+                    <p><strong>Scenario 2 - Career Changer:</strong> Michael wants to transition from teaching to corporate training but isn't sure where to start. Career counselling offers systematic exploration of transferable skills and concrete steps to enter the new field.</p>
+                    
+                    <h4 style="color: var(--color-success); margin-top: var(--space-24);">Career Design Scenarios:</h4>
+                    <p><strong>Scenario 1 - Portfolio Career:</strong> Jennifer wants to combine freelance writing, consulting, and teaching rather than pursue one traditional career. Career design helps her construct a coherent narrative that integrates these diverse activities into a meaningful portfolio career.</p>
+                    
+                    <p><strong>Scenario 2 - Life Transition:</strong> Robert is re-evaluating his priorities after becoming a parent and wants work that aligns with his values and allows flexibility. Career design explores his life story to uncover patterns and construct work arrangements that support his broader life goals.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Integration Section -->
+        <section id="integration" class="section">
+            <h2>Integration &amp; Blended Approaches</h2>
+            <p>
+                While career counselling and career design represent distinct paradigms, they are not mutually exclusive. Many contemporary practitioners recognize the value of integrating elements from both approaches, creating blended methodologies that draw on the strengths of each.
+            </p>
+            
+            <div class="integration-list">
+                <ul>
+                    <li>Many modern practitioners use blended approach</li>
+                    <li>Career counselling provides foundation, career design adds flexibility</li>
+                    <li>Assessment tools can inform narrative exploration</li>
+                    <li>Design thinking can enhance traditional counselling methods</li>
+                    <li>Both approaches value client needs and goals</li>
+                </ul>
+            </div>
+            
+            <h3>How Integration Works in Practice</h3>
+            <p>
+                A blended approach might begin with assessment tools from career counselling to provide baseline self-awareness, then use narrative techniques from career design to explore the meaning and significance of those results. For example, after completing a Holland Code assessment, a practitioner might ask: "What story do these results tell about your career journey so far? How does this fit with your life narrative?"
+            </p>
+            
+            <p>
+                Similarly, the experimental mindset from career design can enhance traditional career counselling by encouraging clients to "prototype" career options through informational interviews, job shadowing, or volunteer work before making final decisions. This adds practical testing to the assessment-based matching process.
+            </p>
+            
+            <p>
+                The key is recognizing that different individuals and situations may benefit from different emphases. A recent graduate with limited work experience might need more structured guidance initially, while also being encouraged to view their career as an ongoing construction project. A mid-career professional might benefit from narrative exploration while also appreciating concrete assessment data.
+            </p>
+        </section>
+
+        <!-- Conclusion -->
+        <section id="conclusion" class="section">
+            <h2>Conclusion</h2>
+            <p>
+                Career counselling and career design represent two valuable but fundamentally different approaches to career development. Career counselling, with its roots in trait-and-factor theory and emphasis on assessment-based matching, provides structure and clarity particularly valuable for those beginning their career journey or seeking concrete direction. Its systematic approach helps individuals understand their strengths and identify suitable occupational paths.
+            </p>
+            
+            <p>
+                Career design, emerging from constructivist and narrative theory, offers a more flexible, adaptive approach suited to the complexity and uncertainty of contemporary work. By treating careers as constructed through meaning-making and experimentation, it empowers individuals to create unique paths that integrate work with broader life purposes. Its emphasis on adaptability and narrative identity makes it particularly relevant for navigating today's fluid employment landscape.
+            </p>
+            
+            <p>
+                Neither approach is inherently superior—they serve different needs and contexts. The evolution from career counselling to career design reflects broader shifts in how we understand careers, from fixed occupational journeys to ongoing life projects. However, this evolution doesn't invalidate traditional counselling; rather, it expands our toolkit for supporting career development.
+            </p>
+            
+            <p>
+                The future of career development practice likely lies in thoughtful integration of both paradigms. By understanding the theoretical foundations, methodologies, and appropriate applications of each approach, practitioners can offer more nuanced, responsive support. Individuals seeking career guidance can make informed choices about which approach—or combination of approaches—best serves their unique circumstances, preferences, and goals.
+            </p>
+            
+            <p>
+                As the world of work continues to evolve, with increasing emphasis on flexibility, purpose, and lifelong learning, career development methodologies will undoubtedly continue to adapt. Understanding the distinctions and potential synergies between career counselling and career design provides a foundation for navigating these ongoing changes, whether as practitioners or as individuals constructing our own career paths.
+            </p>
+        </section>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="Back to top">
+        ↑
+    </button>
 
     <script>
-        const video = document.getElementById('v0');
-        const text = document.getElementById('text');
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-        // Force video start
-        video.currentTime = 0.1;
-
-        // SCROLL ENGINE
-        window.addEventListener('scroll', () => {
-            const scrollPx = window.scrollY;
-            const maxScroll = document.body.scrollHeight - window.innerHeight;
-            const scrollPercent = scrollPx / maxScroll;
-            
-            if (video.duration) {
-                video.currentTime = video.duration * scrollPercent;
-            }
-
-            // Text Switching
-            if(scrollPercent < 0.2) {
-                text.innerText = "ISOLATION";
-                text.style.opacity = 1;
-            } else if(scrollPercent < 0.5) {
-                text.innerText = "BREAKOUT";
-                text.style.opacity = 0.8;
-            } else if(scrollPercent < 0.8) {
-                text.innerText = "MULTIPLICATION";
-                text.style.opacity = 1;
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
             } else {
-                text.innerText = "CONFORMITY";
-                text.style.opacity = 1;
+                backToTopButton.classList.remove('visible');
             }
         });
 
-        // MOUSE TRAIL ENGINE
-        document.addEventListener('mousemove', (e) => {
-            const square = document.createElement('div');
-            square.classList.add('trail');
-            document.body.appendChild(square);
-
-            square.style.left = e.clientX + 'px';
-            square.style.top = e.clientY + 'px';
-
-            const size = Math.random() * 30 + 10;
-            square.style.width = size + 'px';
-            square.style.height = size + 'px';
-
-            const animation = square.animate([
-                { opacity: 1, transform: `translate(-50%, -50%) scale(1)` },
-                { opacity: 0, transform: `translate(-50%, -50%) scale(0)` }
-            ], {
-                duration: 800,
-                easing: 'ease-out'
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
+        }
 
-            animation.onfinish = () => square.remove();
+        // Expandable sections functionality
+        function toggleExpandable(id) {
+            const content = document.getElementById(id + '-content');
+            const icon = document.getElementById(id + '-icon');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.classList.remove('expanded');
+            } else {
+                content.classList.add('expanded');
+                icon.classList.add('expanded');
+            }
+        }
+
+        // Table row hover highlight enhancement
+        const tableRows = document.querySelectorAll('.comparison-table tbody tr');
+        tableRows.forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.01)';
+            });
+            row.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
         });
     </script>
 </body>
