@@ -6,45 +6,45 @@
     <title>The Glass Construct</title>
     <style>
         /* 1. FIXED: Body must be transparent so video shows through */
-        body, html { 
-            margin: 0; padding: 0; 
+        body, html {
+            margin: 0; padding: 0;
             background-color: transparent; /* This was the problem */
-            font-family: 'Courier New', monospace; 
-            cursor: crosshair; 
+            font-family: 'Courier New', monospace;
+            cursor: crosshair;
         }
 
         /* 2. VIDEO: Fixed to back */
         #video-container {
-            position: fixed; top: 0; left: 0; 
+            position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: -1; /* Sits behind everything */
             background: black; /* Fallback color */
         }
         video {
-            width: 100%; height: 100%; 
+            width: 100%; height: 100%;
             object-fit: cover;
             opacity: 1; /* Fully visible */
         }
 
         /* 3. SPACER: Forces scrollbar */
-        #spacer { 
-            height: 600vh; 
-        } 
+        #spacer {
+            height: 600vh;
+        }
 
         /* 4. UI TEXT */
         .overlay {
-            position: fixed; width: 100%; text-align: center; 
-            color: white; mix-blend-mode: difference; 
+            position: fixed; width: 100%; text-align: center;
+            color: white; mix-blend-mode: difference;
             pointer-events: none; top: 50%;
-            font-size: 3rem; letter-spacing: 8px; 
+            font-size: 3rem; letter-spacing: 8px;
             transform: translateY(-50%);
             text-transform: uppercase;
             transition: opacity 0.5s ease;
         }
-        
+
         .hint {
             position: fixed; bottom: 30px; width: 100%; text-align: center;
-            color: rgba(255, 255, 255, 0.7); font-size: 0.8rem; 
+            color: rgba(255, 255, 255, 0.7); font-size: 0.8rem;
             mix-blend-mode: exclusion;
         }
 
@@ -57,12 +57,84 @@
             mix-blend-mode: overlay;
             transform: translate(-50%, -50%);
         }
+
+        /* 6. CUBE */
+        #cube-scene {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            perspective: 600px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        #cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCube 12s infinite linear;
+        }
+
+        @keyframes rotateCube {
+            0%   { transform: rotateX(0deg)   rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        .face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backface-visibility: hidden;
+        }
+
+        .face video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+        }
+
+        .face.front  { transform: rotateY(0deg)    translateZ(100px); }
+        .face.back   { transform: rotateY(180deg)  translateZ(100px); }
+        .face.left   { transform: rotateY(-90deg)  translateZ(100px); }
+        .face.right  { transform: rotateY(90deg)   translateZ(100px); }
+        .face.top    { transform: rotateX(90deg)   translateZ(100px); }
+        .face.bottom { transform: rotateX(-90deg)  translateZ(100px); }
     </style>
 </head>
 <body>
 
     <div id="video-container">
         <video id="v0" src="video.mp4" playsinline muted preload="auto"></video>
+    </div>
+
+    <div id="cube-scene">
+        <div id="cube">
+            <div class="face front">
+                <video src="video.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="face back">
+                <video src="video.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="face left">
+                <video src="video.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="face right">
+                <video src="video.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="face top">
+                <video src="video.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="face bottom">
+                <video src="video.mp4" autoplay muted loop playsinline></video>
+            </div>
+        </div>
     </div>
 
     <div class="overlay" id="text">ISOLATION</div>
@@ -82,7 +154,7 @@
             const scrollPx = window.scrollY;
             const maxScroll = document.body.scrollHeight - window.innerHeight;
             const scrollPercent = scrollPx / maxScroll;
-            
+
             if (video.duration) {
                 video.currentTime = video.duration * scrollPercent;
             }
